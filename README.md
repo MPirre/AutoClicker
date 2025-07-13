@@ -125,4 +125,4 @@ Este projeto é apenas para fins educativos e recreativos. Usa, modifica e parti
 
 ## 👨‍🎓 Autor
 
-Projeto desenvolvido por **[Miguel Pirré]** – programador, e amante de pastilhas elásticas!
+Projeto desenvolvido por **Miguel Pirré** – programador, e amante de pastilhas elásticas!
