@@ -1,0 +1,420 @@
+#game {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+
+/* Botão Trident com borda animada */
+#Trident-button {
+    background: none;
+    padding: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Corrigido seletor da imagem */
+#Trident-button img {
+    width: 250px;
+    height: 250px;
+}
+
+/* Pontuação */
+#score {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Loja */
+#shop {
+    margin-top: 70px;
+    text-align: center;
+}
+
+#shop-menu {
+    margin-top: 10px;
+}
+
+#shop-menu button {
+    display: flex !important;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* Upgrade manual */
+#upgrade-assalto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin: 0 auto;
+}
+
+#upgrade-assalto .icon {
+    width: 75px;
+    height: 75px;
+}
+
+/* Upgrade franchising */
+#upgrade-franchising {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin: 0 auto;
+}
+
+#upgrade-franchising .icon {
+    width: 75px;
+    height: 75px;
+}
+
+/* Upgrade Amizade */
+#upgrade-amizade {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin: 0 auto;
+}
+
+#upgrade-amizade .icon {
+    width: 75px;
+    height: 75px;
+}
+
+/* Upgrade automático */
+#upgrade-auto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+
+/* Ícones */
+.icon {
+    width: 75px;
+    height: 75px;
+}
+
+#upgrade-critico {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 6px 10px;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+
+#upgrade-critico .icon {
+    width: 75px;
+    height: 75px;
+}
+
+@keyframes rainbow-border {
+    0% {
+        border-image-source: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+
+    100% {
+        border-image-source: linear-gradient(405deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+}
+
+.rainbow-neon {
+    border: 6px solid;
+    border-radius: 12px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    animation: rainbow-border 4s linear infinite;
+    box-shadow: 0 0 15px red, 0 0 30px orange, 0 0 45px yellow, 0 0 60px green, 0 0 75px blue, 0 0 90px indigo, 0 0 105px violet;
+    transition: all 0.3s ease-in-out;
+}
+
+#news-ticker {
+    background-color: #111;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body.dark-mode, html.dark-mode {
+    background: #181818 !important;
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode * {
+    background: transparent !important;
+    color: #f1f1f1 !important;
+}
+
+/* Remover background do main-content no modo escuro */
+#main-content.dark-mode {
+    background: transparent !important;
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode #main-content,
+body.dark-mode #game,
+body.dark-mode #shop-menu,
+body.dark-mode #leaderboard,
+body.dark-mode #score,
+body.dark-mode #news-ticker {
+    background: transparent !important;
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode button,
+#main-content.dark-mode button {
+    background: #222 !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode input,
+#main-content.dark-mode input {
+    background: #222 !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+
+/* Personalize mais elementos conforme desejar */
+
+.crit-hit {
+    position: absolute;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    animation: crit-pop 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes crit-pop {
+    0% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.5);
+    }
+}
+
+#super-trident-container {
+    display: none;
+    position: fixed;
+    top: 30%;
+    right: 30px;
+
+
+    transform: translateY(-50%);
+    z-index: 1000;
+    width: 300px;
+    height: auto;
+}
+
+#super-trident-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#mendes {
+    display: none;
+    position: fixed;
+    top: 55%;
+    left: 30px;
+
+
+    transform: translateY(55%);
+    z-index: 3000;
+    width: 300px;
+    height: auto;
+}
+
+#mendes img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+#shop-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#save {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#reset-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#leaderboard-submit {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(17, 17, 17, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 10000;
+}
+
+#leaderboard-submit input[type="text"] {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    width: 160px;
+}
+
+#leaderboard-submit button {
+    padding: 8px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #4CAF50;
+    /* verde */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#leaderboard-submit button:hover {
+    background-color: #45a049;
+}
+
+.leaderboard {
+    position: fixed;
+    left: 0;
+    top: 50px;
+    width: 220px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #222;
+    color: #eee;
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.leaderboard h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+#leaderboard-list {
+    padding-left: 20px;
+}
+
+#leaderboard-list li {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+#leaderboard-submit {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(17, 17, 17, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 10000;
+}
+
+#leaderboard-submit input[type="text"] {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    width: 160px;
+    color: #000;
+}
+
+#leaderboard-submit button {
+    padding: 8px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #4CAF50;
+    /* verde */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#leaderboard-submit button:hover {
+    background-color: #45a049;
+}
+
+#main-content {
+    background: transparent !important;
+}
+
+body.dark-mode {
+    background: #181818 !important;
+    color: #f1f1f1 !important;
+}
+body.dark-mode button,
+body.dark-mode input {
+    background: #222 !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}

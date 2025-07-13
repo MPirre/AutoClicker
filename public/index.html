@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trident Melancia Clicker</title>
+    <link rel="icon" href="Imagens/favicon.webp" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<audio id="mendes-sound" src="sons/espetaculosom.mp3" preload="auto"></audio>
+
+<audio id="musica-fundo" src="sons/mario.mp3" preload="auto" loop></audio>
+
+
+<div id="autoclicker-warning"
+    style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); z-index:9999; text-align:center;">
+    <img src="Imagens/alert.gif" alt="Aviso 1" style="width:100px; margin:10px;">
+    <br>
+    <img src="Imagens/nono.gif" alt="Aviso 2" style="width:100px; margin:10px;">
+    <div style="font-size:2em; color:red; margin-top:20px;">As pastilhas devem ser adquiridas de forma legal!!!!!!!! Bandido!</div>
+        <div style="font-size:2em; color:red; margin-top:20px;">Tira 2 minutinhos para refletir sobre o que fizeste!</div>
+</div>
+
+<body>
+    <audio id="mendes-sound" src="sons/espetaculosom.mp3" preload="auto"></audio>
+    <audio id="musica-fundo" src="sons/mario.mp3" preload="auto" loop></audio>
+    <div id="main-content">
+        <!-- Notícias no topo -->
+        <div id="news-ticker">
+            <marquee behavior="scroll" direction="left">
+                🚨 PASTILHAS ADQUIRIDAS DE FORMA LEGAL!!!!!! 🚨
+            </marquee>
+        </div>
+
+        <div id="leaderboard" class="leaderboard">
+            <h3>Leaderboard</h3>
+            <ol id="leaderboard-list"></ol>
+        </div>
+
+        <!-- Jogo -->
+        <div id="game">
+            <h1>Trident Melancia Clicker</h1>
+
+            <div id="score">
+                Tridents: <span id="score-value">0</span>
+            </div>
+
+            <!-- FERNANDO MENDES  -->
+            <div id="mendes">
+                <img src="Imagens/espetaculo.gif" alt="Super Tridd!">
+            </div>
+
+            <!-- Botão principal -->
+            <button id="Trident-button" aria-label="Clique para obter Tridents">
+                <img src="Imagens/trident.png.webp" alt="Trident Sandia!" />
+            </button>
+
+            <!-- VEGETAAAAAAA   -->
+            <div id="super-trident-container">
+                <img src="Imagens/Vegeta.png" alt="Super Trident!" style="width:200px; height:auto;">
+            </div>
+
+            <!-- Loja -->
+            <div id="shop">
+                <button id="shop-toggle">🛒 Loja</button>
+
+                <div id="shop-menu" style="display: none;">
+                    <!-- Upgrade assalto -->
+                    <button id="upgrade-assalto">
+                        <img src="Imagens/Faquinha.png" alt="Faquinha" class="icon">
+                        <span class="upgrade-text">
+                            ASSALTO: +1 por Click! (Preço 50 Tridents)
+                        </span>
+                    </button>
+
+                    <!-- Upgrade automático -->
+                    <button id="upgrade-auto">
+                        <img src="Imagens/packTrident.jpg.png" alt="Combo Trident" class="icon">
+                        <span class="upgrade-text">
+                            FARM DE TRIDENT 1 Click/s! (Preço 150 Tridents)
+                        </span>
+                    </button>
+
+                    <!-- Franchising -->
+                    <button id="upgrade-franchising">
+                        <img class="icon" src="Imagens/franchise.png" alt="Franchising">
+                        <span class="upgrade-text">FRANCHISING: Multiplica a farm automática! (Custa 15000)</span>
+                    </button>
+
+                    <!-- Crítico -->
+                    <button id="upgrade-critico">
+                        <img src="Imagens/critico.png" alt="Crítico" class="icon">
+                        <span class="upgrade-text">
+                            CRÍTICO: +1% chance de 1.5x por clique! (Preço 2000 Tridents)
+                        </span>
+                    </button>
+
+                    <!-- Amizade -->
+                    <button id="upgrade-amizade">
+                        <img src="Imagens/Amizade.png" alt="Amizade" class="icon">
+                        <span class="upgrade-text">
+                            AMIZADE: +1% das tuas Trident por segundo! (Preço 5000 Tridents)
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de guardar e resetar -->
+        <button id="save">💾 Guardar as minhas Trident!!!</button>
+        <button id="reset-button">🔁 Resetar Jogo (😭😭😭OH NÃO AS MINHAS TRIDENT😭😭😭)</button>
+
+        <!-- Campo de nome + botão fixados no canto inferior esquerdo -->
+        <div id="leaderboard-submit">
+            <input type="text" id="player-name" placeholder="Seu nome" maxlength="20" />
+            <button id="submit-score">Submeter Trident para Avaliação</button>
+        </div>
+
+        <div id="volume-control" style="position: fixed; bottom: 80px; right: 10px; z-index: 1000;">
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div id="music-toggle" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000; cursor: pointer;">
+            <img id="music-icon" src="Imagens/sound.jpg" alt="Toggle Música" width="60">
+        </div>
+        <button id="toggle-dark-mode" style="margin-bottom: 20px;">Modo Assalto</button>
+    </div>
+    <div id="autoclicker-warning"
+        style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%); z-index:9999; text-align:center;">
+        <img src="Imagens/alert.gif" alt="Aviso 1" style="width:100px; margin:10px auto 0 auto; display:block;">
+        <img src="Imagens/nono.gif" alt="Aviso 2" style="width:100px; margin:10px auto 0 auto; display:block;">
+        <div style="font-size:2em; color:red; margin-top:20px;">As pastilhas devem ser adquiridas de forma legal!!!!!!!! Bandido!</div>
+        <div style="font-size:2em; color:red; margin-top:20px;">Tira 2 minutinhos para refletir sobre o que fizeste!</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

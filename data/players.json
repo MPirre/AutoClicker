@@ -1,0 +1,34 @@
+{
+  "1db2659a-afc5-4e0e-af16-1a5b602816e7": {
+    "playerId": "1db2659a-afc5-4e0e-af16-1a5b602816e7",
+    "score": 21,
+    "clickPower": 2,
+    "upgradeLevel": 1,
+    "upgradeCost": 100,
+    "autoClickers": 0,
+    "autoClickerLevel": 0,
+    "autoClickerCost": 150,
+    "critChance": 0,
+    "critLevel": 0,
+    "critCost": 2000,
+    "amizadeLevel": 0,
+    "amizadeCost": 5000,
+    "franchisingLevel": 0
+  },
+  "e9ea72ca-628f-411f-8780-8a88e9a5fdc0": {
+    "playerId": "e9ea72ca-628f-411f-8780-8a88e9a5fdc0",
+    "score": 7,
+    "clickPower": 1,
+    "upgradeLevel": 0,
+    "upgradeCost": 50,
+    "autoClickers": 0,
+    "autoClickerLevel": 0,
+    "autoClickerCost": 150,
+    "critChance": 0,
+    "critLevel": 0,
+    "critCost": 2000,
+    "amizadeLevel": 0,
+    "amizadeCost": 5000,
+    "franchisingLevel": 0
+  }
+}
