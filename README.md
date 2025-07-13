@@ -24,8 +24,8 @@ Bem-vindo ao **Trident Clicker** – um divertido jogo incremental onde o teu ob
 - Guarda automaticamente o progresso com `localStorage`.
 - Elementos visuais desbloqueáveis (ex: imagem secreta do Fernando Mendes 🎭).
 - Sons e animações que tornam a experiência mais divertida.
-- Niveis (A/B/C...) depois de chegar ao número máximo 1.7976931348623157e+308  (Ainda não implementado na versão final)
-- Dark Mode (Por implementar)
+- Niveis (A/B/C...) depois de chegar ao número máximo 1.7976931348623157e+308  (Não está a 100%(penso xD))
+- Dark Mode (Modo Assalto)
 
 ---
 
