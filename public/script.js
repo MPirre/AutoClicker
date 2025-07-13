@@ -159,7 +159,7 @@ async function saveGame() {
             body: JSON.stringify(saveData)
         });
     } catch (err) {
-        console.error("Erro ao salvar jogo:", err.message);
+        console.error("Erro ao guardar jogo:", err.message);
     }
 }
 
@@ -193,14 +193,14 @@ function updateScore() {
     updateAll();
 }
 
-const SCORE_LIMIT = Number.MAX_SAFE_INTEGER; // ou outro valor desejado
+const SCORE_LIMIT = Number.MAX_SAFE_INTEGER;
 
 function checkScoreCycle() {
     if (score > SCORE_LIMIT) {
         score = 0;
         scoreCycle++;
         alert(`Parabéns! Avançaste para o ciclo ${cycleLetters[scoreCycle - 1] || scoreCycle}`);
-        // Aqui você pode dar algum bônus, se quiser
+
     }
 }
 
@@ -325,7 +325,7 @@ async function submitScore() {
     const playerName = input.value.trim();
 
     if (!playerName) {
-        alert("Por favor, insira seu nome antes de submeter.");
+        alert("Por favor, insira o seu username antes de submeter.");
         return;
     }
 
@@ -352,7 +352,7 @@ async function submitScore() {
 // Eventos
 let lastClickTime = 0;
 let clickTimestamps = [];
-const MAX_CLICKS_PER_SECOND = 12;
+const MAX_CLICKS_PER_SECOND = 18;
 const MIN_CLICK_INTERVAL = 50; // ms
 
 cookieButton.addEventListener('click', function () {

@@ -3,6 +3,21 @@
     font-family: sans-serif;
 }
 
+#title {
+    margin-top: 10px;
+}
+
+#toggle-dark-mode {
+    position: fixed;
+    top: 55px;
+    right: 20px;
+    z-index: 10001;
+    display: block;
+    margin: 0;
+    align-items: unset;
+    justify-content: unset;
+    margin-bottom: 0;
+}
 
 /* Botão Trident com borda animada */
 #Trident-button {
@@ -147,11 +162,9 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 9999;
+    /* Remove position, top, width, z-index */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
 }
 
 html, body {
