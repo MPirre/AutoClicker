@@ -79,6 +79,10 @@ const superTridentContainer = document.getElementById('super-trident-container')
 
 const volumeSlider = document.getElementById('volume-slider');
 
+// Definir volume inicial para metade (0.5)
+music.volume = 0.3;
+volumeSlider.value = 0.3;
+
 volumeSlider.addEventListener('input', () => {
     music.volume = volumeSlider.value;
 });
@@ -193,14 +197,34 @@ function updateScore() {
     updateAll();
 }
 
-const SCORE_LIMIT = Number.MAX_SAFE_INTEGER;
+const SCORE_LIMIT = 1000; // Limite mais baixo para ser mais fácil de atingir
 
 function checkScoreCycle() {
     if (score > SCORE_LIMIT) {
         score = 0;
         scoreCycle++;
-        alert(`Parabéns! Avançaste para o ciclo ${cycleLetters[scoreCycle - 1] || scoreCycle}`);
-
+        
+        // Reset automático de todos os upgrades quando avança de ciclo
+        clickPower = 1;
+        upgradeLevel = 0;
+        upgradeCost = 50;
+        autoClickers = 0;
+        autoClickerLevel = 0;
+        autoClickerCost = 150;
+        critChance = 0;
+        critLevel = 0;
+        critCost = 2000;
+        amizadeLevel = 0;
+        amizadeCost = 5000;
+        franchisingLevel = 0;
+        
+        alert(`Parabéns! Avançaste para o ciclo ${cycleLetters[scoreCycle - 1] || scoreCycle}! Todos os upgrades foram resetados.`);
+        
+        // Atualizar a interface após o reset
+        updateAll();
+        
+        // Guardar o jogo automaticamente após avançar de ciclo
+        saveGame();
     }
 }
 
