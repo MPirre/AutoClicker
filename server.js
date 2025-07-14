@@ -48,19 +48,56 @@ app.post('/api/save', (req, res) => {
 // Rota para submeter ao leaderboard
 app.post('/api/submit-score', (req, res) => {
     console.log('Dados recebidos em /api/submit-score:', req.body);
-    const { playerId, name, score } = req.body;
-    if (!playerId || !name || typeof score !== 'number') {
-        return res.status(400).json({ error: "Dados inválidos." });
+    console.log('Tipo dos dados:', typeof req.body);
+    console.log('playerId:', req.body.playerId, 'tipo:', typeof req.body.playerId);
+    console.log('name:', req.body.name, 'tipo:', typeof req.body.name);
+    console.log('score:', req.body.score, 'tipo:', typeof req.body.score);
+    console.log('scoreCycle:', req.body.scoreCycle, 'tipo:', typeof req.body.scoreCycle);
+    
+    const { playerId, name, score, scoreCycle } = req.body;
+    
+    console.log('Valores extraídos:', { playerId, name, score, scoreCycle });
+    
+    console.log('Validação dos dados:');
+    console.log('- playerId válido:', !!playerId, 'valor:', playerId);
+    console.log('- name válido:', !!name, 'valor:', name);
+    console.log('- score válido:', !!score, 'valor:', score);
+    
+    if (!playerId || !name || !score) {
+        console.log('❌ Dados inválidos detectados!');
+        console.log('Dados inválidos:', { 
+            playerId: !!playerId, 
+            name: !!name, 
+            score: !!score,
+            playerIdValue: playerId,
+            nameValue: name,
+            scoreValue: score
+        });
+        return res.status(400).json({ error: "Dados inválidos.", details: { playerId: !!playerId, name: !!name, score: !!score } });
     }
+    
+    console.log('✅ Todos os dados são válidos!');
 
     const data = readData();
     if (!data[playerId]) {
-        data[playerId] = { playerId, name, score };
+        data[playerId] = { playerId, name, score, scoreCycle };
     }
 
-    if (!data[playerId].score || score > data[playerId].score) {
+    // Comparar scores considerando ciclos
+    const currentScoreCycle = data[playerId].scoreCycle || 0;
+    const shouldUpdate = !data[playerId].score || 
+                        (scoreCycle > currentScoreCycle) ||
+                        (scoreCycle === currentScoreCycle && score !== data[playerId].score);
+
+    if (shouldUpdate) {
+        // Adicionar letra do ciclo ao score para o leaderboard
+        const cycleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let cycleSuffix = scoreCycle > 0 ? cycleLetters[scoreCycle - 1] || scoreCycle : "";
+        let scoreWithCycle = score + cycleSuffix;
+        
         data[playerId].name = name;
-        data[playerId].score = score;
+        data[playerId].score = scoreWithCycle; // Guardar com letra do ciclo
+        data[playerId].scoreCycle = scoreCycle || 0;
     }
 
     writeData(data);
@@ -71,8 +108,24 @@ app.post('/api/submit-score', (req, res) => {
 app.get('/api/leaderboard', (req, res) => {
     const data = Object.values(readData());
     const leaderboard = data
-        .filter(p => typeof p.score === 'number')
-        .sort((a, b) => b.score - a.score)
+        .filter(p => p.score) // Aceitar tanto números como strings
+        .sort((a, b) => {
+            // Se um tem scoreCycle e outro não, o que tem scoreCycle vai primeiro
+            if (a.scoreCycle && !b.scoreCycle) return -1;
+            if (!a.scoreCycle && b.scoreCycle) return 1;
+            
+            // Se ambos têm scoreCycle, ordenar por scoreCycle (maior primeiro)
+            if (a.scoreCycle && b.scoreCycle) {
+                if (a.scoreCycle !== b.scoreCycle) {
+                    return b.scoreCycle - a.scoreCycle;
+                }
+            }
+            
+            // Se scoreCycle igual ou ambos sem scoreCycle, tentar ordenar por score
+            const scoreA = typeof a.score === 'number' ? a.score : parseFloat(a.score) || 0;
+            const scoreB = typeof b.score === 'number' ? b.score : parseFloat(b.score) || 0;
+            return scoreB - scoreA;
+        })
         .slice(0, 10);
     res.json(leaderboard);
 });

@@ -152,7 +152,6 @@ async function saveGame() {
         critChance, critLevel, critCost,
         amizadeLevel, amizadeCost,
         franchisingLevel,
-        playerName,
         scoreCycle
     };
 
@@ -337,7 +336,9 @@ function updateLeaderboardDisplay() {
     const listEl = document.getElementById('leaderboard-list');
     if (!listEl) return;
     listEl.innerHTML = '';
-    leaderboard.sort((a, b) => b.score - a.score).slice(0, 10).forEach(entry => {
+    
+    // O servidor já ordena por ciclos, só mostrar os dados
+    leaderboard.forEach(entry => {
         const li = document.createElement('li');
         li.textContent = `${entry.name}: ${entry.score}`;
         listEl.appendChild(li);
@@ -353,23 +354,56 @@ async function submitScore() {
         return;
     }
 
+
+
+    // Enviar apenas o score numérico, o servidor vai adicionar a letra do ciclo
+    let scoreToSend = formatScoreWithSpaces(score);
+    
+    console.log('Debug score:', {
+        score: score,
+        scoreCycle: scoreCycle,
+        scoreToSend: scoreToSend
+    });
+    
+    // Garantir que o score não seja uma string vazia
+    if (!scoreToSend || scoreToSend.trim() === '') {
+        alert("Score inválido. Tenta novamente.");
+        return;
+    }
+
     try {
+        const requestData = { 
+            playerId, 
+            name: playerName, 
+            score: scoreToSend,
+            scoreCycle: scoreCycle
+        };
+        
+        console.log('Enviando dados:', requestData);
+        console.log('playerId verificação:', playerId, 'tipo:', typeof playerId);
+        
         const response = await fetch(`${API_BASE_URL}/api/submit-score`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ playerId, name: playerName, score })
+            body: JSON.stringify(requestData)
         });
 
+        console.log('Status da resposta:', response.status);
+        
         if (response.ok) {
-            alert(`Obrigado, ${playerName}! Submeteste ${score} Tridents para o Leaderboard!`);
+            let cycleSuffix = scoreCycle > 0 ? cycleLetters[scoreCycle - 1] || scoreCycle : "";
+            let displayScore = scoreToSend + cycleSuffix;
+            alert(`Obrigado, ${playerName}! Submeteste ${displayScore} Tridents para o Leaderboard!`);
             input.value = '';
             loadLeaderboard();
         } else {
-            throw new Error("Erro ao submeter score.");
+            const errorText = await response.text();
+            console.error('Erro do servidor:', errorText);
+            throw new Error(`Erro ao submeter score. Status: ${response.status}`);
         }
     } catch (err) {
-        console.error(err);
-        alert("Erro ao submeter para o leaderboard.");
+        console.error('Erro completo:', err);
+        alert("Erro ao submeter para o leaderboard: " + err.message);
     }
 }
 
